@@ -4,10 +4,9 @@ const { auth, JWT_SECRET } = require("./auth");
 const mongoose = require("mongoose");
 const express = require("express");
 const bcrypt = require("bcrypt");
+require("dotenv").config();
 
-mongoose.connect(
-  "mongodb+srv://rishabh:69rKqevmEkSEBZEx@cluster0.jcpreac.mongodb.net/todo-app?retryWrites=true&w=majority&appName=Cluster0"
-);
+mongoose.connect(process.env.MONGODB_URI);
 
 const app = express();
 app.use(express.json());
@@ -97,6 +96,6 @@ app.delete("/deleteTodo", auth, async function (req, res) {
   });
 });
 
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on http://localhost:${process.env.PORT}`);
 });
