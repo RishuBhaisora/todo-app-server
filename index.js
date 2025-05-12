@@ -5,10 +5,16 @@ const mongoose = require("mongoose");
 const express = require("express");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
+const cors = require("cors");
 
 mongoose.connect(process.env.MONGODB_URI);
 
 const app = express();
+
+app.use(cors({
+  origin: '*',
+}));
+
 app.use(express.json());
 
 app.get("/", async function (req, res) {
